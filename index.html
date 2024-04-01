@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Name - Personal Webpage</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             text-align: center; /* Center the content */
         }
         h1 {
             color: #333;
-            margin: 20px 0;
+            margin-top: 20px;
         }
         img.profile-photo {
             width: 150px; /* Adjust based on your preference */
@@ -34,16 +34,32 @@
         a:hover {
             text-decoration: underline; /* Underline links on hover */
         }
+        /* Ensure elements stack on smaller screens */
+        @media (max-width: 768px) {
+            img.profile-photo {
+                width: 100px; /* Smaller profile photo on smaller screens */
+            }
+        }
     </style>
 </head>
 <body>
-<h1>Your Name</h1>
-<img src="path_to_your_profile_photo.jpg" alt="Your Name" class="profile-photo">
-<ul class="links-list">
-    <li><a href="https://link_to_your_portfolio.com">Portfolio</a></li>
-    <li><a href="https://link_to_your_resume.com">Resume</a></li>
-    <li><a href="https://link_to_your_github.com">GitHub</a></li>
-    <li><a href="https://link_to_your_linkedin.com">LinkedIn</a></li>
-</ul>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Your Name</h1>
+            <img src="img.png" alt="Your Name" class="profile-photo">
+            <ul class="links-list">
+                <li><a href="https://link_to_your_portfolio.com">Portfolio</a></li>
+                <li><a href="https://link_to_your_resume.com">Resume</a></li>
+                <li><a href="https://link_to_your_github.com">GitHub</a></li>
+                <li><a href="https://link_to_your_linkedin.com">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Optional JavaScript and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
