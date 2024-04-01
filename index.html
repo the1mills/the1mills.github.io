@@ -34,26 +34,85 @@
         a:hover {
             text-decoration: underline; /* Underline links on hover */
         }
+        .top-image {
+            position: fixed; /* Fix the position relative to the viewport */
+            top: 0; /* Align to the bottom of the viewport */
+            left: 50%; /* Centering: move it to the half of the viewport */
+            transform: translateX(-50%); /* Centering: shift it back by half of its own width */
+            width: 250px; /* Adjust based on your preference */
+        }
+        .bottom-image {
+            position: fixed; /* Fix the position relative to the viewport */
+            bottom: 0; /* Align to the bottom of the viewport */
+            left: 50%; /* Centering: move it to the half of the viewport */
+            transform: translateX(-50%); /* Centering: shift it back by half of its own width */
+            width: 250px; /* Adjust based on your preference */
+        }
         /* Ensure elements stack on smaller screens */
         @media (max-width: 768px) {
             img.profile-photo {
                 width: 100px; /* Smaller profile photo on smaller screens */
             }
         }
+
+        /* Tooltip CSS */
+        a[data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            white-space: nowrap;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 10px;
+            font-size: 12px;
+            z-index: 1;
+
+            /* Show the tooltip */
+            visibility: visible;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+
+        a[data-tooltip] {
+            position: relative;
+            cursor: pointer;
+        }
+
+        a[data-tooltip]:hover::before {
+            /* Optional: Adds a 'nub' or 'arrow' under the tooltip */
+            content: "";
+            position: absolute;
+            top: -5px; /* Adjust to move the arrow */
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            background-color: #555;
+            width: 10px;
+            height: 10px;
+            z-index: -1;
+        }
+
+
     </style>
 </head>
 <body>
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1>Alexander Mills</h1>
+            <h1>역대 최고의 프로그래머</h1>
+            <img src="img_1.png" alt="Title Image" class="top-image">
             <img src="img.png" alt="Alex Mills" class="profile-photo">
             <ul class="links-list">
-                <li><a target="_blank" href="https://linkedin.com/in/alexanderdmills">My LinkedIn</a></li>
-                <li><a target="_blank" href="https://docs.google.com/document/d/1Xz1e76LA6A8DD0npeektfI84pJ4nAmbcNuCyEEbJLxM/edit?usp=sharing">My Resume</a></li>
-                <li><a target="_blank" href="https://github.com/oresoftware">My GitHub</a></li>
-                <li><a target="_blank" href="https://medium.com/@oresoftware">Blog (medium.com)</a></li>
+                <li><a target="_blank" data-tooltip="https://linkedin.com/in/alexanderdmills" href="https://linkedin.com/in/alexanderdmills">My LinkedIn</a></li>
+                <li><a target="_blank" data-tooltip="https://docs.google.com/document/d/1Xz1e76LA6A8DD0npeektfI84pJ4nAmbcNuCyEEbJLxM/edit?usp=sharing" href="https://docs.google.com/document/d/1Xz1e76LA6A8DD0npeektfI84pJ4nAmbcNuCyEEbJLxM/edit?usp=sharing">My Resume</a></li>
+                <li><a target="_blank" data-tooltip="https://github.com/oresoftware" href="https://github.com/oresoftware">My GitHub</a></li>
+                <li><a target="_blank" data-tooltip="https://medium.com/@oresoftware" href="https://medium.com/@oresoftware">Blog (medium.com)</a></li>
+                <li><a target="_blank" data-tooltip="https://stackoverflow.com/users/1223975/alexander-mills" href="https://stackoverflow.com/users/1223975/alexander-mills">My StackOverflow</a></li>
             </ul>
+            <img src="img_1.png" alt="Footer Image" class="bottom-image">
         </div>
     </div>
 </div>
