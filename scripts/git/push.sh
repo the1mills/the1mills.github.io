@@ -20,5 +20,6 @@ git commit -am "${trimmed}" || {
 }
 
 git push origin || {
-  echo
+  echo 'Could not push to origin.'
+  exit 1;
 }
