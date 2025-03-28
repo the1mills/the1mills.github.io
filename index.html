@@ -389,7 +389,6 @@
             }
         }
 
-        /* Corner name positioning */
         .corner-name {
             position: fixed;
             color: var(--primary-color);
@@ -397,26 +396,10 @@
             font-size: 0.9rem;
             z-index: 100;
             opacity: 0.8;
-            transition: opacity 0.3s ease;
         }
 
         .corner-name:hover {
             opacity: 1;
-        }
-
-        .top-right {
-            top: 1rem;
-            right: 1rem;
-        }
-
-        .top-left {
-            top: 1rem;
-            left: 1rem;
-        }
-
-        .bottom-left {
-            bottom: 1rem;
-            left: 1rem;
         }
 
         .top-center {
@@ -431,71 +414,107 @@
             transform: translateX(-50%);
         }
 
-        /* Angled name styles */
-        .angle-90 {
-            transform: rotate(90deg);
-            transform-origin: left top;
-            margin-top: 3rem;
-            margin-left: 0.5rem;
+        /* Wheel rotation */
+        .wheel-container {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            z-index: 100;
         }
 
-        .angle-45 {
-            transform: rotate(45deg);
-            transform-origin: left top;
-            margin-top: 2rem;
-            margin-left: 2rem;
+        .top-left-wheel {
+            top: 20px;
+            left: 20px;
         }
 
-        .angle-neg-90 {
-            transform: rotate(-90deg);
-            transform-origin: right top;
-            margin-top: 3rem;
-            margin-right: 0.5rem;
+        .top-right-wheel {
+            top: 20px;
+            right: 20px;
         }
 
-        .angle-neg-45 {
-            transform: rotate(-45deg);
-            transform-origin: right top;
-            margin-top: 2rem;
-            margin-right: 2rem;
+        .bottom-left-wheel {
+            bottom: 20px;
+            left: 20px;
         }
 
-        .bottom-angle-90 {
-            transform: rotate(-90deg); /* Mirror of top 90 degree */
-            transform-origin: left bottom;
-            margin-bottom: 3rem;
-            margin-left: 0.5rem;
+        .bottom-right-wheel {
+            bottom: 20px;
+            right: 20px;
         }
 
-        .bottom-right {
-            bottom: 1rem;
-            right: 1rem;
+        .wheel {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-duration: 10s;
         }
 
-        .bottom-angle-45 {
-            transform: rotate(-45deg); /* Mirror of top 45 degree */
-            transform-origin: left bottom;
-            margin-bottom: 2rem;
-            margin-left: 2rem;
+        .wheel-text {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            transform-origin: center bottom;
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+            width: 110px;
+            text-align: center;
         }
 
-        .bottom-angle-neg-90 {
-            transform: rotate(90deg); /* Mirror of top -90 degree */
-            transform-origin: right bottom;
-            margin-bottom: 3rem;
-            margin-right: 0.5rem;
+        .wheel:hover .wheel-text {
+            opacity: 1;
         }
 
-        .bottom-angle-neg-45 {
-            transform: rotate(45deg); /* Mirror of top -45 degree */
-            transform-origin: right bottom;
-            margin-bottom: 2rem;
-            margin-right: 2rem;
+        .top-left-spin {
+            animation-name: spin-clockwise;
+        }
+
+        .top-right-spin {
+            animation-name: spin-counter-clockwise;
+            animation-duration: 12s;
+        }
+
+        .bottom-left-spin {
+            animation-name: spin-counter-clockwise;
+            animation-duration: 14s;
+        }
+
+        .bottom-right-spin {
+            animation-name: spin-clockwise;
+            animation-duration: 16s;
+        }
+
+        @keyframes spin-clockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes spin-counter-clockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
         }
 
         @media (max-width: 640px) {
-            .corner-name {
+            .wheel-container {
+                width: 60px;
+                height: 60px;
+            }
+
+            .wheel {
+                width: 60px;
+                height: 60px;
+            }
+
+            .wheel-text {
                 font-size: 0.7rem;
+                width: 70px;
             }
         }
 
@@ -506,31 +525,38 @@
     </style>
 </head>
 <body>
-<!-- Corner names - Top Left -->
-<div class="corner-name top-left">Alexander Mills</div>
-<div class="corner-name top-left angle-90">Alexander Mills</div>
-<div class="corner-name top-left angle-45">Alexander Mills</div>
+<!-- Wheel Names in Corners -->
+<!-- Top Left Corner -->
+<div class="wheel-container top-left-wheel">
+    <div class="wheel top-left-spin">
+        <div class="wheel-text">Alexander Mills</div>
+    </div>
+</div>
 
-<!-- Top Center -->
+<!-- Top Right Corner -->
+<div class="wheel-container top-right-wheel">
+    <div class="wheel top-right-spin">
+        <div class="wheel-text">Alexander Mills</div>
+    </div>
+</div>
+
+<!-- Bottom Left Corner -->
+<div class="wheel-container bottom-left-wheel">
+    <div class="wheel bottom-left-spin">
+        <div class="wheel-text">Alexander Mills</div>
+    </div>
+</div>
+
+<!-- Bottom Right Corner -->
+<div class="wheel-container bottom-right-wheel">
+    <div class="wheel bottom-right-spin">
+        <div class="wheel-text">Alexander Mills</div>
+    </div>
+</div>
+
+<!-- Center Names -->
 <div class="corner-name top-center">Alexander Mills</div>
-
-<!-- Corner names - Top Right -->
-<div class="corner-name top-right">Alexander Mills</div>
-<div class="corner-name top-right angle-neg-90">Alexander Mills</div>
-<div class="corner-name top-right angle-neg-45">Alexander Mills</div>
-
-<!-- Corner names - Bottom Left -->
-<div class="corner-name bottom-left">Alexander Mills</div>
-<div class="corner-name bottom-left bottom-angle-90">Alexander Mills</div>
-<div class="corner-name bottom-left bottom-angle-45">Alexander Mills</div>
-
-<!-- Bottom Center -->
 <div class="corner-name bottom-center">Alexander Mills</div>
-
-<!-- Corner names - Bottom Right -->
-<div class="corner-name bottom-right">Alexander Mills</div>
-<div class="corner-name bottom-right bottom-angle-neg-90">Alexander Mills</div>
-<div class="corner-name bottom-right bottom-angle-neg-45">Alexander Mills</div>
 
 <div class="container">
     <div class="profile-card animate-fade-in">
