@@ -4,154 +4,612 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alexander Mills - Personal Webpage</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center; /* Center the content */
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --bg-color: #f9fafb;
+            --card-bg: #ffffff;
+            --accent-color: #6366f1;
         }
-        h1 {
-            color: #333;
-            margin-top: 20px;
-        }
-        img.profile-photo {
-            width: 150px; /* Adjust based on your preference */
-            border-radius: 50%; /* Circular profile photo */
-            margin-top: 20px;
-        }
-        ul.links-list {
-            list-style-type: none; /* Remove default list styling */
+
+        * {
+            margin: 0;
             padding: 0;
-        }
-        ul.links-list li {
-            margin: 10px 0;
-        }
-        a {
-            text-decoration: none;
-            color: #007bff; /* Link color */
-        }
-        a:hover {
-            text-decoration: underline; /* Underline links on hover */
-        }
-        .top-image {
-            position: fixed; /* Fix the position relative to the viewport */
-            top: 0; /* Align to the bottom of the viewport */
-            left: 50%; /* Centering: move it to the half of the viewport */
-            transform: translateX(-50%); /* Centering: shift it back by half of its own width */
-            width: 250px; /* Adjust based on your preference */
-        }
-        .bottom-image {
-            position: fixed; /* Fix the position relative to the viewport */
-            bottom: 0; /* Align to the bottom of the viewport */
-            left: 50%; /* Centering: move it to the half of the viewport */
-            transform: translateX(-50%); /* Centering: shift it back by half of its own width */
-            width: 250px; /* Adjust based on your preference */
-        }
-        /* Ensure elements stack on smaller screens */
-        @media (max-width: 768px) {
-            img.profile-photo {
-                width: 100px; /* Smaller profile photo on smaller screens */
-            }
+            box-sizing: border-box;
         }
 
-        /* Tooltip CSS */
-        a[data-tooltip]:hover::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            white-space: nowrap;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px 10px;
-            font-size: 12px;
-            z-index: 1;
-
-            /* Show the tooltip */
-            visibility: visible;
-            opacity: 1;
-            transition: opacity 0.3s;
-        }
-
-        a[data-tooltip] {
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
             position: relative;
-            cursor: pointer;
         }
 
-        a[data-tooltip]:hover::before {
-            /* Optional: Adds a 'nub' or 'arrow' under the tooltip */
-            content: "";
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .profile-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .profile-header {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--card-bg);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            position: relative;
+        }
+
+        .profile-bg {
             position: absolute;
-            top: -5px; /* Adjust to move the arrow */
-            left: 50%;
-            transform: translateX(-50%) rotate(45deg);
-            background-color: #555;
-            width: 10px;
-            height: 10px;
-            z-index: -1;
+            top: -30px;
+            left: 0;
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 12px 12px 0 0;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 1rem 0 0.5rem;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding-bottom: 0.75rem;
         }
 
         .summary-section {
-            text-align: center; /* Align the text to the left */
-            margin-top: 20px; /* Add some space above the summary section */
-            padding: 0 15px; /* Add some padding on the sides for better readability */
-            font-size: 16px; /* Adjust the font size as needed */
-            line-height: 1.6; /* Increase the line height for better readability */
+            margin: 1.5rem 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 0.5rem;
         }
 
-        body, html {
-            height: 100%;
-            margin: 0;
-            padding: 0;
+        .summary-section p {
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            color: #4b5563;
+        }
+
+        .links-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            list-style-type: none;
+        }
+
+        .links-list li a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.15);
+        }
+
+        .links-list li a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(37, 99, 235, 0.2);
+        }
+
+        .links-list li a i {
+            font-size: 1.2rem;
+        }
+
+        .read-more-btn {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .read-more-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .hidden-section {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease, margin 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .hidden-section.visible {
+            max-height: 1000px;
+            opacity: 1;
+            margin-top: 2rem;
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            animation: scrollAnimation 2s infinite;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(99, 102, 241, 0.3);
+        }
+
+        .contact-info {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: none;
+        }
+
+        .contact-info.visible {
+            display: block;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.7;
+            text-align: center;
+            padding-bottom: 1rem;
+        }
+
+        .hidden-content {
+            background-color: rgba(99, 102, 241, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        @keyframes scrollAnimation {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            background-color: #808080; /* This is a shade of gray */
+            opacity: 0.7;
         }
 
-        .content {
-            padding: 20px;
-            background-color: white; /* Content background is white for contrast */
-            border-radius: 8px;
-            /* Optional: Set a specific width/height for the content box if desired */
-            /* width: 50%; */
-            /* max-width: 600px; */
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-color: #f3f4f6;
+                --bg-color: #111827;
+                --card-bg: #1f2937;
+                --primary-color: #3b82f6;
+                --secondary-color: #60a5fa;
+                --accent-color: #818cf8;
+            }
+
+            .summary-section p {
+                color: #d1d5db;
+            }
+
+            .hidden-content {
+                background-color: rgba(99, 102, 241, 0.1);
+            }
         }
 
+        /* Mobile responsiveness */
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .profile-card {
+                padding: 1.5rem;
+            }
+
+            .profile-photo {
+                width: 120px;
+                height: 120px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .links-list {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .links-list li a {
+                justify-content: center;
+            }
+        }
+
+        /* Glass morphism effect for a more modern 2025 look */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        /* Subtle animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* Pixelated Dragon Animation */
+        .dragon {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: 20px;
+            left: 20px;
+            z-index: 999;
+            image-rendering: pixelated;
+            animation: dragonFlight 10s ease-in-out infinite;
+            opacity: 0.8;
+            pointer-events: none; /* Ensure it doesn't interfere with clicking */
+        }
+
+        @keyframes dragonFlight {
+            0% {
+                top: 20px;
+                left: 20px;
+                transform: scale(1) rotate(0deg);
+                opacity: 0.8;
+            }
+            15% {
+                top: 50px;
+                left: 60%;
+                transform: scale(1.1) rotate(45deg);
+            }
+            30% {
+                top: 40%;
+                left: 80%;
+                transform: scale(0.9) rotate(180deg);
+            }
+            45% {
+                top: 70%;
+                left: 60%;
+                transform: scale(1.2) rotate(270deg);
+            }
+            60% {
+                top: 50%;
+                left: 40%;
+                transform: scale(0.9) rotate(360deg);
+            }
+            75% {
+                top: 30%;
+                left: 50%;
+                transform: scale(0.8) rotate(400deg);
+            }
+            90% {
+                top: 55%;
+                left: 48%;
+                transform: scale(0.6) rotate(450deg);
+                opacity: 0.8;
+            }
+            100% {
+                top: 58%;
+                left: 50%;
+                transform: scale(0.1) rotate(540deg);
+                opacity: 0;
+            }
+        }
+
+        /* Corner name positioning */
+        .corner-name {
+            position: fixed;
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 0.9rem;
+            z-index: 100;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .corner-name:hover {
+            opacity: 1;
+        }
+
+        .top-right {
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .top-left {
+            top: 1rem;
+            left: 1rem;
+        }
+
+        .bottom-left {
+            bottom: 1rem;
+            left: 1rem;
+        }
+
+        .top-center {
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .bottom-center {
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Angled name styles */
+        .angle-90 {
+            transform: rotate(90deg);
+            transform-origin: left top;
+            margin-top: 3rem;
+            margin-left: 0.5rem;
+        }
+
+        .angle-45 {
+            transform: rotate(45deg);
+            transform-origin: left top;
+            margin-top: 2rem;
+            margin-left: 2rem;
+        }
+
+        .angle-neg-90 {
+            transform: rotate(-90deg);
+            transform-origin: right top;
+            margin-top: 3rem;
+            margin-right: 0.5rem;
+        }
+
+        .angle-neg-45 {
+            transform: rotate(-45deg);
+            transform-origin: right top;
+            margin-top: 2rem;
+            margin-right: 2rem;
+        }
+
+        .bottom-angle-90 {
+            transform: rotate(-90deg); /* Mirror of top 90 degree */
+            transform-origin: left bottom;
+            margin-bottom: 3rem;
+            margin-left: 0.5rem;
+        }
+
+        .bottom-right {
+            bottom: 1rem;
+            right: 1rem;
+        }
+
+        .bottom-angle-45 {
+            transform: rotate(-45deg); /* Mirror of top 45 degree */
+            transform-origin: left bottom;
+            margin-bottom: 2rem;
+            margin-left: 2rem;
+        }
+
+        .bottom-angle-neg-90 {
+            transform: rotate(90deg); /* Mirror of top -90 degree */
+            transform-origin: right bottom;
+            margin-bottom: 3rem;
+            margin-right: 0.5rem;
+        }
+
+        .bottom-angle-neg-45 {
+            transform: rotate(45deg); /* Mirror of top -45 degree */
+            transform-origin: right bottom;
+            margin-bottom: 2rem;
+            margin-right: 2rem;
+        }
+
+        @media (max-width: 640px) {
+            .corner-name {
+                font-size: 0.7rem;
+            }
+        }
+
+        .top-center, .bottom-center {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
-<div class="container content">
-    <div class="row">
-        <div class="col-12">
-            <h1>Alexander Mills</h1>
-            <img src="img_1.png" alt="Title Image" class="top-image">
+<!-- Corner names - Top Left -->
+<div class="corner-name top-left">Alexander Mills</div>
+<div class="corner-name top-left angle-90">Alexander Mills</div>
+<div class="corner-name top-left angle-45">Alexander Mills</div>
+
+<!-- Top Center -->
+<div class="corner-name top-center">Alexander Mills</div>
+
+<!-- Corner names - Top Right -->
+<div class="corner-name top-right">Alexander Mills</div>
+<div class="corner-name top-right angle-neg-90">Alexander Mills</div>
+<div class="corner-name top-right angle-neg-45">Alexander Mills</div>
+
+<!-- Corner names - Bottom Left -->
+<div class="corner-name bottom-left">Alexander Mills</div>
+<div class="corner-name bottom-left bottom-angle-90">Alexander Mills</div>
+<div class="corner-name bottom-left bottom-angle-45">Alexander Mills</div>
+
+<!-- Bottom Center -->
+<div class="corner-name bottom-center">Alexander Mills</div>
+
+<!-- Corner names - Bottom Right -->
+<div class="corner-name bottom-right">Alexander Mills</div>
+<div class="corner-name bottom-right bottom-angle-neg-90">Alexander Mills</div>
+<div class="corner-name bottom-right bottom-angle-neg-45">Alexander Mills</div>
+
+<div class="container">
+    <div class="profile-card animate-fade-in">
+        <div class="profile-header">
+            <div class="profile-bg"></div>
             <img src="images/img_1.png" alt="Alex Mills" class="profile-photo">
-            <div class="summary-section">
-                <p>Software engineer; enjoy the culture and can have a good laugh.</p>
-                <p>[Also have strong sales/marketing (eg, SEO) experience from running my own outfit].</p>
-                <p>Master of the hipster trifecta of Node, Erlang and Golang.</p>
-                <p>Prime of career. Show me the code.</p>
+        </div>
+
+        <h1 class="animate-fade-in delay-1">Alexander Mills</h1>
+
+        <div class="summary-section animate-fade-in delay-2">
+            <p>Software engineer; enjoy the culture and can have a good laugh.</p>
+            <p>Master of the hipster trifecta of Node, Erlang and Golang.</p>
+            <p>Prime of career. Show me the code.</p>
+        </div>
+
+        <ul class="links-list animate-fade-in delay-3">
+            <li><a href="https://linkedin.com/in/alexanderdmills" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+            <li><a href="https://docs.google.com/document/d/1Xz1e76LA6A8DD0npeektfI84pJ4nAmbcNuCyEEbJLxM/edit?usp=sharing" target="_blank"><i class="far fa-file-alt"></i> Resume</a></li>
+            <li><a href="https://github.com/oresoftware" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+            <li><a href="https://medium.com/@oresoftware" target="_blank"><i class="fab fa-medium"></i> Blog</a></li>
+            <li><a href="https://stackoverflow.com/users/1223975/alexander-mills" target="_blank"><i class="fab fa-stack-overflow"></i> StackOverflow</a></li>
+        </ul>
+
+        <button class="read-more-btn animate-fade-in delay-4" id="readMoreBtn">Read More</button>
+
+        <!-- Pixelated Dragon -->
+        <svg class="dragon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill="var(--primary-color)" d="M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M15.5,8C16.33,8 17,8.67 17,9.5C17,10.33 16.33,11 15.5,11C14.67,11 14,10.33 14,9.5C14,8.67 14.67,8 15.5,8M8.5,8C9.33,8 10,8.67 10,9.5C10,10.33 9.33,11 8.5,11C7.67,11 7,10.33 7,9.5C7,8.67 7.67,8 8.5,8M12,17.5C9.5,17.5 7.5,16.5 6,14.5C6.5,13.5 7.8,12.8 9.38,12.5C9.55,12.5 9.75,12.45 10,12.45C10.25,12.45 10.5,12.45 10.75,12.5A2.5,2.5 0 0,1 13.25,12.5C13.5,12.45 13.75,12.45 14,12.45C14.25,12.45 14.45,12.5 14.62,12.5C16.2,12.8 17.5,13.5 18,14.5C16.5,16.5 14.5,17.5 12,17.5Z" />
+            <path fill="#ff9900" d="M9,14H15L12,11Z" transform="rotate(180 12 12)" />
+            <path fill="#ff5500" d="M12,2 L14,6 L12,10 L10,6 Z" transform="rotate(90 12 7)" />
+        </svg>
+
+        <div class="hidden-section" id="hiddenSection">
+            <div class="hidden-content">
+                <p>Hey there! I'm a well-rounded, outgoing engineer with hands-on experience since 2010. I've worked across B2B, B2C, B2Self, and B2Gov sectors, wearing multiple hats along the way.</p>
+
+                <p>Beyond just coding, I've done sales engineering and led small teams as CTO and tech lead. My toolkit includes <span class="highlight">AWS/GCP, Linux/Unix, Node.js, TypeScript, Golang, Erlang/BEAM, and all things Docker</span>. I absolutely love building stuff and remain an Individual Contributor at heart! 💥</p>
+
+                <p>I've developed special expertise in deep search, encrypted messaging, APMs, Chrome Extensions, and PWAs. I'm certified in both AWS and GCP, with some Azure/OpenShift experience too.</p>
+
+                <p>My strengths lie in creating full-stack apps with JavaScript, Node.js and Golang, along with expertise in software testing, CI/CD, and deploying across multiple platforms (Convox, Kubernetes, Mesos, Nomad, ECS, bare EC2, you name it). 💥</p>
+
+                <p>What drives me? Interesting projects that do good in the world. I'm proud to be in the top 0.1% on StackOverflow since 2015 (top 1500 all-time worldwide). I've published tons of open-source software and developed numerous libraries and SDKs.</p>
+
+                <p>To me, software is a practical means to create something useful—and I'm ready to make a positive impact in your organization!</p>
+
+                <button class="contact-btn" id="contactBtn">Contact Me</button>
+
+                <div class="contact-info" id="contactInfo">
+                    <p>Email: alexander.d.mills@gmail.com</p>
+                    <p>Phone: +1 (737) 281-4824</p>
+                </div>
             </div>
-            <ul class="links-list">
-                <li><a target="_blank" data-tooltip="https://linkedin.com/in/alexanderdmills" href="https://linkedin.com/in/alexanderdmills">My LinkedIn 🚀</a></li>
-                <li><a target="_blank" data-tooltip="https://docs.google.com/document/d/1Xz1e76LA6A8DD0npeektfI84pJ4nAmbcNuCyEEbJLxM/edit?usp=sharing" href="https://docs.google.com/document/d/1Xz1e76LA6A8DD0npeektfI84pJ4nAmbcNuCyEEbJLxM/edit?usp=sharing">My Resume 🚀</a></li>
-                <li><a target="_blank" data-tooltip="https://github.com/oresoftware" href="https://github.com/oresoftware">My GitHub 🚀</a></li>
-                <li><a target="_blank" data-tooltip="https://medium.com/@oresoftware" href="https://medium.com/@oresoftware">Blog (medium.com) 🚀</a></li>
-                <li><a target="_blank" data-tooltip="https://stackoverflow.com/users/1223975/alexander-mills" href="https://stackoverflow.com/users/1223975/alexander-mills">My StackOverflow 🚀🚀🚀</a></li>
-            </ul>
-            <img src="img_1.png" alt="Footer Image" class="bottom-image">
+        </div>
+
+        <div class="copyright">
+            Copyright © Alex Mills 2026
         </div>
     </div>
 </div>
-<!-- Optional JavaScript and Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.6/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const readMoreBtn = document.getElementById('readMoreBtn');
+    const hiddenSection = document.getElementById('hiddenSection');
+    const contactBtn = document.getElementById('contactBtn');
+    const contactInfo = document.getElementById('contactInfo');
+
+    readMoreBtn.addEventListener('click', function() {
+      hiddenSection.classList.toggle('visible');
+      readMoreBtn.textContent = hiddenSection.classList.contains('visible') ? 'Read Less' : 'Read More';
+    });
+
+    contactBtn.addEventListener('click', function() {
+      contactInfo.classList.toggle('visible');
+      contactBtn.textContent = contactInfo.classList.contains('visible') ? 'Hide Contact' : 'Contact Me';
+    });
+  });
+</script>
 </body>
 </html>
